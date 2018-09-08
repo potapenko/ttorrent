@@ -37,7 +37,7 @@ public class FairPieceStorageFactory implements PieceStorageFactory {
         int len = Math.min(
                 (int) (totalSize - position),
                 pieceLength);
-        ByteBuffer buffer = ByteBuffer.allocate(len);
+        ByteBuffer buffer = ByteBuffer.allocateDirect(len);
         byteStorage.read(buffer, position);
         byte[] expectedHash = Arrays.copyOfRange(metadata.getPiecesHashes(), i * Constants.PIECE_HASH_SIZE, (i + 1) * Constants.PIECE_HASH_SIZE);
         byte[] actualHash = TorrentUtils.calculateSha1Hash(buffer.array());
